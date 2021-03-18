@@ -1,0 +1,208 @@
+scriptencoding utf-8
+set encoding=utf-8
+
+set nocompatible
+set modifiable
+
+call plug#begin('~/.vim/vimplug')
+Plug 'scrooloose/syntastic'
+Plug 'plasticboy/vim-markdown'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'delimitMate.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jparise/vim-graphql'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'severin-lemaignan/vim-minimap'
+call plug#end()
+
+" set the runtime path to include Vundle and initialize
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
+"Plugin 'gmarik/Vundle.vim'
+"Plugin 'scrooloose/syntastic'
+"Plugin 'plasticboy/vim-markdown'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'mxw/vim-jsx'
+"Plugin 'delimitMate.vim'
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'jparise/vim-graphql'
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
+"Plugin 'severin-lemaignan/vim-minimap'
+"call vundle#end()            " required
+
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
+
+" allow hidden modified buffers
+set hidden
+
+" line numbers
+set number
+
+set ignorecase
+set smartcase
+
+" syntax highlighting
+syntax enable
+filetype plugin indent on
+
+" Show unwanted whitespace
+set listchars=tab:»»,nbsp:~,trail:·
+set list
+
+" indentation
+set autoindent
+set smartindent
+
+" tab functionality
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set smarttab
+
+" Scrolling buffer
+set scrolloff=5
+set sidescrolloff=5
+
+" Change movement keys to home keys
+noremap ; l
+noremap l k
+noremap k j
+noremap j h
+
+" split functionality
+set splitbelow
+set splitright
+
+" use jj to leave insert mode
+inoremap jj <Esc>
+
+" remove highlighting
+noremap hh :nohl<Enter>
+
+"Navigate through buffers
+noremap K :bn<Enter>
+noremap L :bp<Enter>
+
+"Save system files using sudo
+cmap w!! %!sudo tee > /dev/null %
+
+" prettify json under selection/movement
+"nnoremap =j :%!python -m json.tool<CR>
+
+let mapleader=","
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>p :TogglePencil<CR>
+
+" buffer keys
+nnoremap <leader>c :bp <BAR> bd #<CR>
+nnoremap <leader>l :ls<CR>
+nnoremap <leader>e :e<space>
+
+" pane navigation
+nnoremap <leader>a <C-W><C-H>
+nnoremap <leader>f <C-W><C-L>
+nnoremap <leader>s <C-W><C-J>
+nnoremap <leader>d <C-W><C-K>
+
+" clipboard keybindings
+vnoremap <C-c> "*y
+vnoremap <C-S-v> "*P
+
+" Fold stuff
+"set foldenable
+set foldmethod=marker
+noremap zk zj
+noremap zl zk
+
+" Netrw options
+"let g:netrw_banner=0
+
+" Show the command as you type it
+set showcmd
+
+" change to the directory of the current file
+set autochdir
+
+" incremental search
+set incsearch
+
+" search highlighting
+set hlsearch
+nnoremap <silent> n n:call HLNext(0.4)<cr>
+nnoremap <silent> N N:call HLNext(0.4)<cr>
+
+function! HLNext (blinktime)
+   set invcursorline
+   redraw
+   exec 'sleep' . float2nr(a:blinktime * 1000) . 'm'
+   set invcursorline
+   redraw
+endfunction
+
+"Show when text goes over 80 characters
+set colorcolumn=80
+highlight ColorColumn ctermbg=magenta
+
+" vim-jsx settings
+"let g:jsx_ext_required = 0
+
+" ctrlp settings
+let g:ctrlp_prompt_mappings = {
+    \ 'PrtSelectMove("j")':   ['<c-k>', '<down>'],
+    \ 'PrtSelectMove("k")':   ['<c-l>', '<up>'],
+    \ 'PrtCurRight()':        ['<right>'],
+    \ }
+let g:ctrlp_show_hidden = 1
+nnoremap <C-p> :CtrlPMixed<cr>
+
+" vim-markdown settings
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_folding_disabled = 1
+autocmd FileType md set wrap linebreak
+
+" nerdtree settings
+nnoremap <C-n> :NERDTreeToggle<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Syntastic recommended settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:tex_flavor='latex'
+autocmd FileType tex nmap <buffer> <leader>t :!latexmk -pdf %<CR>
+autocmd FileType tex nmap <buffer> <leader>s :!open -a Skim %<.pdf %<.pdf<CR><CR>
+autocmd FileType tex set textwidth=80
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_markdown_checkers = ['textlint']
+
+let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSPlit="vertical"
+set rtp+=~/.vim/bundle/vim-snippets/snippets

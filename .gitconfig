@@ -1,0 +1,20 @@
+[user]
+	name = James Kavanaugh
+	email = james@dangerginger.com
+[color]
+	ui = auto
+[core]
+	excludesfile = /Users/dangerginger/.gitignore
+	autocrlf = input
+[merge]
+	tool = nvim
+[mergetool "nvim"]
+  cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
+[mergetool]
+  prompt = false
+	keepBackup = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

@@ -1,0 +1,27 @@
+" Change movement keys to home keys
+noremap ; l
+noremap l k
+noremap k j
+noremap j h
+
+" use jj to leave insert mode
+inoremap jj <Esc>
+
+" remove highlighting
+noremap hh :nohl<Enter>
+
+"Navigate through buffers
+noremap K gt
+noremap L gT
+
+let mapleader=","
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+
+" buffer keys
+nnoremap <leader>c :bp <BAR> bd #<CR>
+nnoremap <leader>l :ls<CR>
+nnoremap <leader>e :e<space>
+
+nnoremap gn :action GotoNextError<CR>
+nnoremap gp :action GotoPreviousError<CR>

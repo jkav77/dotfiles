@@ -1,0 +1,7 @@
+{
+  "java.trace.server": "verbose",
+  "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
+  "snippets.ultisnips.enable": false
+}
+
+

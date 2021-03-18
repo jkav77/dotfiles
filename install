@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const fs = require('fs')
+
+fs.readdir('.', (err, files) => {
+  if (err) {
+    throw err
+  }
+  files.forEach(console.log)
+})
+

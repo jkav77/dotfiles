@@ -3,3 +3,5 @@
 	email = james@dangerginger.com
 [pull]
 	rebase = true
+[core]
+	excludesfile = /Users/dangerginger/.gitignore

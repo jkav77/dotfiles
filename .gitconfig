@@ -1,0 +1,5 @@
+[user]
+	name = James Kavanaugh
+	email = james@dangerginger.com
+[pull]
+	rebase = true

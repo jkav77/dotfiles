@@ -18,16 +18,18 @@ const processDir = (base) => {
       fs.mkdirSync(homePath, {recursive:true})
       processDir(`${relPath}`)
     } else {
-      const stat = fs.lstatSync(homePath)
-      if (stat.isFile()) {
-        console.log(`Backing up ${homePath}`)
-        fs.renameSync(homePath, `${homePath}.backup`)
-      } else if (stat.isSymbolicLink()) {
-        console.log(`Removing old symbolic link ${homePath}`)
-        fs.rmSync(homePath)
-      } else {
-        console.log(`Cannot replace directory ${homePath} with a file.`)
-        throw new Error()
+      if (fs.existsSync(homePath)) {
+        const stat = fs.lstatSync(homePath)
+        if (stat.isFile()) {
+          console.log(`Backing up ${homePath}`)
+          fs.renameSync(homePath, `${homePath}.backup`)
+        } else if (stat.isSymbolicLink()) {
+          console.log(`Removing old symbolic link ${homePath}`)
+          fs.rmSync(homePath)
+        } else {
+          console.log(`Cannot replace directory ${homePath} with a file.`)
+          throw new Error()
+        }
       }
       console.log(`Linking ${sourcePath} to ${homePath}`)
       fs.symlinkSync(sourcePath, homePath)

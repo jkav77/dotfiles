@@ -41,6 +41,7 @@ set sidescrolloff=5
 set splitright
 set splitbelow
 set diffopt+=vertical
+set nostartofline
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap keys

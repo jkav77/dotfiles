@@ -3,44 +3,45 @@
 const fs = require('fs')
 
 const ignoredFiles = [
-  '.git',
-  'install',
-  'LICENSE'
+    '.git',
+    'install',
+    'setup',
+    'LICENSE'
 ]
 
 const HOME = process.env.HOME
 console.log(`Installing dotfiles for ${HOME}`)
 const processDir = (base) => {
-  const files = fs.readdirSync(base, {withFileTypes: true})
-  files.forEach(file => {
-    if (ignoredFiles.includes(file.name)) {
-      return
-    }
-    const relPath = `${base}/${file.name.replace(/^\.\//, '')}`
-    const sourcePath = `${__dirname}/${relPath}`
-    const homePath = `${HOME}/${relPath}`
-    if (file.isDirectory()) {
-      console.log(`Creating directory ${homePath}`)
-      fs.mkdirSync(homePath, {recursive:true})
-      processDir(`${relPath}`)
-    } else {
-      if (fs.existsSync(homePath)) {
-        const stat = fs.lstatSync(homePath)
-        if (stat.isFile()) {
-          console.log(`Backing up ${homePath}`)
-          fs.renameSync(homePath, `${homePath}.backup`)
-        } else if (stat.isSymbolicLink()) {
-          console.log(`Removing old symbolic link ${homePath}`)
-          fs.rmSync(homePath)
-        } else {
-          console.log(`Cannot replace directory ${homePath} with a file.`)
-          throw new Error()
+    const files = fs.readdirSync(base, {withFileTypes: true})
+    files.forEach(file => {
+        if (ignoredFiles.includes(file.name)) {
+            return
         }
-      }
-      console.log(`Linking ${sourcePath} to ${homePath}`)
-      fs.symlinkSync(sourcePath, homePath)
-    }
-  })
+        const relPath = `${base}/${file.name.replace(/^\.\//, '')}`
+        const sourcePath = `${__dirname}/${relPath}`
+        const homePath = `${HOME}/${relPath}`
+        if (file.isDirectory()) {
+            console.log(`Creating directory ${homePath}`)
+            fs.mkdirSync(homePath, {recursive:true})
+            processDir(`${relPath}`)
+        } else {
+            if (fs.existsSync(homePath)) {
+                const stat = fs.lstatSync(homePath)
+                if (stat.isFile()) {
+                    console.log(`Backing up ${homePath}`)
+                    fs.renameSync(homePath, `${homePath}.backup`)
+                } else if (stat.isSymbolicLink()) {
+                    console.log(`Removing old symbolic link ${homePath}`)
+                    fs.rmSync(homePath)
+                } else {
+                    console.log(`Cannot replace directory ${homePath} with a file.`)
+                    throw new Error()
+                }
+            }
+            console.log(`Linking ${sourcePath} to ${homePath}`)
+            fs.symlinkSync(sourcePath, homePath)
+        }
+    })
 }
 
 processDir('.')

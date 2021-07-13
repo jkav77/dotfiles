@@ -7,6 +7,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'rhysd/vim-clang-format'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-rooter'
@@ -29,11 +31,10 @@ syntax enable
 filetype plugin indent on
 set listchars=tab:»»,nbsp:~,trail:·
 set list
-set autoindent
-set smartindent
+set cindent
 set expandtab
 set tabstop=2
-set shiftwidth=4
+set shiftwidth=2
 set softtabstop=2
 set smarttab
 set scrolloff=5
@@ -59,7 +60,7 @@ let mapleader=","
 nnoremap <leader>c :bp <BAR> bd #<CR>
 nnoremap <leader>e :e<space>
 nnoremap <leader>a <C-W><C-H>
-nnoremap <leader>f <C-W><C-L>
+nnoremap <leader>f <C-W>l
 nnoremap <leader>s <C-W><C-J>
 nnoremap <leader>d <C-W><C-K>
 nnoremap <leader>w :w<cr>
@@ -129,7 +130,7 @@ let g:fzf_colors =
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-rooter settings
-let g:rooter_patterns = ['.git', '.zshrc', 'Makefile', 'build.gradle']
+let g:rooter_patterns = ['.git', '.zshrc', 'Makefile', 'build.gradle', 'package.json', 'build.xml', '.vim', '.ccls']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Coc settings
@@ -209,3 +210,14 @@ function! UpdateSkim(status)
     call system(join(l:cmd + [line('.'), shellescape(l:out), shellescape(l:tex)], ' '))
   endif
 endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-lsp-cxx-highlight settings
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-clang-format
+nnoremap <leader>g :<C-u>ClangFormat<CR>
+

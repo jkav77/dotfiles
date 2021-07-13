@@ -1,7 +1,34 @@
 {
   "java.trace.server": "verbose",
   "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
-  "snippets.ultisnips.enable": false
+  "snippets.ultisnips.enable": false,
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "initializationOptions": {
+        "index": {
+          "onChange": true
+        },
+        "highlight": { "lsRanges" : true },
+        "cache": {
+          "directory": "/tmp/ccls"
+        }
+      }
+    }
+  }
 }
 
 

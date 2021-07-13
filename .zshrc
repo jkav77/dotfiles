@@ -11,9 +11,10 @@ plugins=(tmux git)
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH=/usr/local/opt/openjdk/bin:$PATH:/Library/TeX/texbin
+export PATH=/usr/local/opt/openjdk@11/bin:$PATH:/Library/TeX/texbin
+export JDK_HOME=/usr/local/opt/openjdk@11/libexec/openjdk.jdk/Contents/Home
+export JAVA_HOME=${JDK_HOME}
 export EDITOR="nvim"
-
 export FZF_DEFAULT_COMMAND="rg --files --hidden"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

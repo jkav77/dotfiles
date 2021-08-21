@@ -43,6 +43,10 @@ set splitright
 set splitbelow
 set diffopt+=vertical
 set nostartofline
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap keys
@@ -69,15 +73,6 @@ nnoremap gk gj
 nnoremap gl gk
 tnoremap <Esc> <C-\><C-n>
 tnoremap jj <C-\><C-n>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Terminal setup
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-function! OpenTerminal()
-  split term://zsh
-  resize 10
-endfunction
-nnoremap <c-t> :call OpenTerminal()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NerdTree setup
@@ -146,11 +141,17 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)

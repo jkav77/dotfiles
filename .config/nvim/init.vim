@@ -50,10 +50,10 @@ set signcolumn=yes
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap keys
-noremap ; l
-noremap l k
-noremap k j
-noremap j h
+" noremap ; l
+" noremap l k
+" noremap k j
+" noremap j h
 noremap <A-k> gj
 noremap <A-l> gk
 inoremap jj <Esc>
@@ -69,8 +69,8 @@ nnoremap <leader>s <C-W><C-J>
 nnoremap <leader>d <C-W><C-K>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
-nnoremap gk gj
-nnoremap gl gk
+" nnoremap gk gj
+" nnoremap gl gk
 tnoremap <Esc> <C-\><C-n>
 tnoremap jj <C-\><C-n>
 

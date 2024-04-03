@@ -60,6 +60,7 @@ inoremap jj <Esc>
 noremap hh :nohl<Enter>
 noremap K :bn<Enter>
 noremap L :bp<Enter>
+nnoremap ; :
 let mapleader=","
 nnoremap <leader>c :bp <BAR> bd #<CR>
 nnoremap <leader>e :e<space>

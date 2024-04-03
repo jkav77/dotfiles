@@ -78,10 +78,10 @@ set scrolloff=5
 set sidescrolloff=5
 
 " Change movement keys to home keys
-noremap ; l
-noremap l k
-noremap k j
-noremap j h
+" noremap ; l
+" noremap l k
+" noremap k j
+" noremap j h
 
 " split functionality
 set splitbelow

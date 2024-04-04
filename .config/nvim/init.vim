@@ -54,10 +54,11 @@ set signcolumn=yes
 " noremap l k
 " noremap k j
 " noremap j h
+noremap ; :
 noremap <A-k> gj
 noremap <A-l> gk
 inoremap jj <Esc>
-noremap hh :nohl<Enter>
+" noremap hh :nohl<Enter>
 noremap K :bn<Enter>
 noremap L :bp<Enter>
 nnoremap ; :

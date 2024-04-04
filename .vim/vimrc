@@ -91,7 +91,7 @@ set splitright
 inoremap jj <Esc>
 
 " remove highlighting
-noremap hh :nohl<Enter>
+" noremap hh :nohl<Enter>
 
 "Navigate through buffers
 noremap K :bn<Enter>
